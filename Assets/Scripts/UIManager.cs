@@ -1,38 +1,36 @@
 using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
     [Header("UI Elements")]
+    [SerializeField] TextMeshProUGUI _scoreText;
     [SerializeField] TextMeshProUGUI _xpText;
     [SerializeField] TextMeshProUGUI _coinsText;
 
-    [Header("Player Stats")]
-    [SerializeField] int _xp;
-    [SerializeField] int _coins;
+    [Header("References")]
+    [SerializeField] GameManager _gameManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        _gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateScore()
     {
-        
+        _scoreText.text = $"Score: {_gameManager.Score}";
     }
 
-    void UpdateXP(int xp)
+    public void UpdateXP()
     {
-        _xp = xp;
-        _xpText.text = $"XP: {_xp}";
+        _xpText.text = $"XP: {_gameManager.Xp}";
     }
 
-    void UpdateCoins(int coins)
+    public void UpdateCoins()
     {
-        _coins = coins;
-        _coinsText.text = $"Coins: {_coins}";
+        _coinsText.text = $"Coins: {_gameManager.Coins}";
     }
 }
